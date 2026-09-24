@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block header_title %}Welcome Home{% endblock %}
+
+{% block content %}
+<div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+    <h2 class="text-lg font-bold text-gray-800 mb-2">Logged in as: <span class="text-indigo-600">{{ request.user.username }}</span></h2>
+    <p class="text-gray-600 text-sm">Dashboard layout and active navigation are ready. Select items from the sidebar to test routes.</p>
+</div>
+{% endblock %}

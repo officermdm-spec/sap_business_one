@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block header_title %}{{ module }} / {{ title }}{% endblock %}
+
+{% block content %}
+<div class="bg-white rounded-xl p-8 shadow-sm border border-gray-200">
+    <div class="border-b pb-4 mb-4">
+        <h2 class="text-2xl font-bold text-gray-800">{{ title }}</h2>
+        <span class="text-xs bg-indigo-100 text-indigo-700 px-2.5 py-1 rounded-full font-semibold">{{ module }} Module</span>
+    </div>
+    <p class="text-gray-500">Dummy interface ready. Actual functional forms and backend data handling can be attached here next.</p>
+</div>
+{% endblock %}
