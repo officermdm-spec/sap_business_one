@@ -1,13 +1,24 @@
 {% extends "base.html" %}
 
+{% block title %}{{ title }} | Nexa ERP{% endblock %}
+
 {% block header_title %}{{ module }} / {{ title }}{% endblock %}
 
 {% block content %}
-<div class="bg-white rounded-xl p-8 shadow-sm border border-gray-200">
-    <div class="border-b pb-4 mb-4">
-        <h2 class="text-2xl font-bold text-gray-800">{{ title }}</h2>
-        <span class="text-xs bg-indigo-100 text-indigo-700 px-2.5 py-1 rounded-full font-semibold">{{ module }} Module</span>
+<div class="max-w-4xl">
+    <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+        <div class="flex flex-col justify-between gap-4 border-b border-slate-100 pb-6 sm:flex-row sm:items-start">
+            <div>
+                <p class="text-xs font-bold uppercase tracking-[0.2em] text-teal-600">{{ module }} module</p>
+                <h2 class="mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">{{ title }}</h2>
+            </div>
+            <span class="inline-flex w-fit items-center rounded-full bg-amber-50 px-3 py-1.5 text-xs font-bold text-amber-700">In preparation</span>
+        </div>
+        <div class="py-10 text-center">
+            <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-50 text-2xl text-teal-700">✦</div>
+            <h3 class="mt-4 text-lg font-bold text-slate-900">Your workspace is ready</h3>
+            <p class="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-500">This interface is prepared for the next stage of {{ title|lower }} workflows and backend data handling.</p>
+        </div>
     </div>
-    <p class="text-gray-500">Dummy interface ready. Actual functional forms and backend data handling can be attached here next.</p>
 </div>
 {% endblock %}
