@@ -5,6 +5,7 @@
 {% block header_title %}Welcome Home{% endblock %}
 
 {% block content %}
+<<<<<<< HEAD
 <div class="relative overflow-hidden rounded-2xl bg-slate-900 p-6 text-white shadow-xl shadow-slate-200 sm:p-8">
     <div class="relative z-10 max-w-2xl">
         <p class="text-xs font-bold uppercase tracking-[0.22em] text-teal-300">Good to see you</p>
@@ -34,5 +35,11 @@
         <p class="mt-1 text-sm text-slate-500">Create and track your POs.</p>
         <span class="mt-5 inline-block text-xs font-bold text-teal-700">Open module →</span>
     </a>
+=======
+<div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+    <h2 class="text-lg font-bold text-gray-800 mb-2">Logged in as: <span class="text-indigo-600">{{ request.user.username }}</span></h2>
+    <h2 class="text-lg font-bold text-gray-800 mb-2">Login At: <span class="text-indigo-600">{{ request.user.last_login }}</span></h2>
+    <p class="text-gray-600 text-sm">Dashboard layout and active navigation are ready. Select items from the sidebar to test routes.</p>
+>>>>>>> 99d29d4 (Templates Updates)
 </div>
 {% endblock %}

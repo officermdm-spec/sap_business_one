@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Create Account | Nexa ERP</title>
+=======
+    <title>Sign Up | ERP System</title>
+>>>>>>> 99d29d4 (Templates Updates)
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         input { width: 100%; border: 1px solid #cbd5e1; border-radius: 0.75rem; padding: 0.75rem 0.875rem; font-size: 0.875rem; outline: none; }
         input:focus { border-color: #14b8a6; box-shadow: 0 0 0 3px rgb(20 184 166 / 0.15); }
     </style>
 </head>
+<<<<<<< HEAD
 <body class="flex min-h-screen items-center justify-center bg-slate-950 px-5 py-10 font-sans text-slate-900">
     <main class="w-full max-w-md">
         <div class="mb-8 text-center text-white">
@@ -34,6 +39,47 @@
             <button type="submit" class="w-full rounded-xl bg-teal-500 py-3 text-sm font-bold text-slate-950 transition hover:bg-teal-400">Create account</button>
             </form>
             <p class="mt-6 text-center text-sm text-slate-500">Already registered? <a href="{% url 'login' %}" class="font-bold text-teal-700 hover:text-teal-600">Sign in</a></p>
+=======
+<body class="min-h-screen bg-slate-950 text-slate-900">
+    <main class="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-10 sm:px-6 lg:px-8">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(14,165,233,0.28),_transparent_38%),radial-gradient(circle_at_bottom_left,_rgba(79,70,229,0.3),_transparent_35%)]"></div>
+        <div class="relative grid w-full max-w-5xl overflow-hidden rounded-3xl bg-white shadow-2xl lg:grid-cols-2">
+            <section class="hidden bg-slate-900 p-10 text-white lg:flex lg:flex-col lg:justify-between xl:p-14">
+                <div>
+                    <p class="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-300">ERP System</p>
+                    <h1 class="mt-8 max-w-sm text-4xl font-bold leading-tight xl:text-5xl">Build a clearer way to work.</h1>
+                    <p class="mt-6 max-w-md text-base leading-7 text-slate-300">Create your account and keep your operational workflows organized in one place.</p>
+                </div>
+                <p class="text-sm text-slate-400">Simple tools for better business control</p>
+            </section>
+
+            <section class="p-6 sm:p-10 lg:p-12 xl:p-14">
+                <div class="mx-auto w-full max-w-md">
+                    <div class="mb-8 lg:hidden">
+                        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-indigo-600">ERP System</p>
+                    </div>
+                    <h2 class="text-3xl font-bold tracking-tight text-slate-900">Create account</h2>
+                    <p class="mt-2 text-sm text-slate-500">Set up your account to get started.</p>
+
+                    <form method="post" class="mt-8 space-y-5 [&_input]:w-full [&_input]:rounded-xl [&_input]:border [&_input]:border-slate-300 [&_input]:bg-white [&_input]:px-4 [&_input]:py-3 [&_input]:text-sm [&_input]:text-slate-900 [&_input]:outline-none [&_input]:transition [&_input]:focus:border-indigo-500 [&_input]:focus:ring-4 [&_input]:focus:ring-indigo-100">
+            {% csrf_token %}
+                        {% if form.non_field_errors %}
+                            <div class="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">{{ form.non_field_errors }}</div>
+                        {% endif %}
+                        {% for field in form %}
+                            <div>
+                                <label for="{{ field.id_for_label }}" class="mb-2 block text-sm font-semibold text-slate-700">{{ field.label }}</label>
+                                {{ field.as_widget|safe }}
+                                {% for error in field.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+                                {% if field.help_text %}<p class="mt-1 text-xs leading-5 text-slate-400">{{ field.help_text|safe }}</p>{% endif %}
+                            </div>
+                        {% endfor %}
+                        <button type="submit" class="w-full rounded-xl bg-indigo-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200">Create account</button>
+                    </form>
+                    <p class="mt-7 text-center text-sm text-slate-500">Already registered? <a href="{% url 'login' %}" class="font-semibold text-indigo-600 hover:text-indigo-700 hover:underline">Sign in</a></p>
+                </div>
+            </section>
+>>>>>>> 99d29d4 (Templates Updates)
         </div>
     </main>
 </body>
