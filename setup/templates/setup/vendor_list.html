@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Vendor Report | Nexa ERP{% endblock %}
+{% block header_title %}Vendor Report{% endblock %}
+
+{% block content %}
+<div class="mx-auto max-w-5xl">
+    <div class="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">Setup / Vendors</p>
+            <h2 class="mt-2 text-2xl font-bold text-slate-900">Vendor report</h2>
+            <p class="mt-1 text-sm text-slate-500">{{ vendors|length }} vendor{{ vendors|length|pluralize }}</p>
+        </div>
+        <a href="{% url 'create_vendor' %}" class="rounded-md bg-teal-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-teal-800">Create vendor</a>
+    </div>
+
+    <div class="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+                <thead class="bg-slate-50 text-xs uppercase text-slate-500">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 font-semibold">Vendor code</th>
+                        <th scope="col" class="px-6 py-3 font-semibold">Vendor name</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    {% for vendor in vendors %}
+                        <tr class="hover:bg-slate-50">
+                            <td class="whitespace-nowrap px-6 py-4 font-medium text-slate-900">{{ vendor.vendor_code }}</td>
+                            <td class="px-6 py-4 text-slate-700">{{ vendor.vendor_name }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="2" class="px-6 py-12 text-center text-sm text-slate-500">No vendors have been created yet.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
