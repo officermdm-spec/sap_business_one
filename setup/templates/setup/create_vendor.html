@@ -40,6 +40,13 @@
 					<p class="mt-1 text-sm text-red-700">{{ error }}</p>
 				{% endfor %}
 			</div>
+			<div>
+				<label for="{{ form.company_name.id_for_label }}" class="mb-2 block text-sm font-medium text-slate-700">Company name</label>
+				{{ form.company_name }}
+				{% for error in form.company_name.errors %}
+					<p class="mt-1 text-sm text-red-700">{{ error }}</p>
+				{% endfor %}
+			</div>
 		</div>
 
 		<div class="flex justify-end border-t border-slate-200 bg-slate-50 px-6 py-4">

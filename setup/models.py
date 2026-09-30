@@ -4,6 +4,7 @@ from django.db import models
 class Vendor(models.Model):
 	vendor_code = models.CharField(max_length=20, unique=True, blank=True, editable=False)
 	vendor_name = models.CharField(max_length=150)
+	company_name = models.CharField(max_length=150, blank=True, null=True)
 
 	def save(self, *args, **kwargs):
 		super().save(*args, **kwargs)

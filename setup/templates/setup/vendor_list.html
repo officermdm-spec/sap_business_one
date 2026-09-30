@@ -21,6 +21,7 @@
                     <tr>
                         <th scope="col" class="px-6 py-3 font-semibold">Vendor code</th>
                         <th scope="col" class="px-6 py-3 font-semibold">Vendor name</th>
+                        <th scope="col" class="px-6 py-3 font-semibold">Company name</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100">
@@ -28,6 +29,7 @@
                         <tr class="hover:bg-slate-50">
                             <td class="whitespace-nowrap px-6 py-4 font-medium text-slate-900">{{ vendor.vendor_code }}</td>
                             <td class="px-6 py-4 text-slate-700">{{ vendor.vendor_name }}</td>
+                            <td class="px-6 py-4 text-slate-700">{{ vendor.company_name }}</td>
                         </tr>
                     {% empty %}
                         <tr>
