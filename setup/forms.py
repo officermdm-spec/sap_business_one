@@ -6,7 +6,7 @@ from .models import Vendor
 class VendorForm(forms.ModelForm):
     class Meta:
         model = Vendor
-        fields = ["vendor_name", "company_name"]
+        fields = ["vendor_name", "company_name", "phone_number"]
         widgets = {
             "vendor_name": forms.TextInput(
                 attrs={
@@ -20,6 +20,13 @@ class VendorForm(forms.ModelForm):
                     "autocomplete": "organization",
                     "class": "block w-full rounded-md border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20",
                     "placeholder": "Enter company name",
+                }
+            ),
+            "phone_number": forms.TextInput(
+                attrs={
+                    "autocomplete": "tel",
+                    "class": "block w-full rounded-md border border-slate-300 px-3 py-2.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20",
+                    "placeholder": "Enter phone number",
                 }
             ),
         }

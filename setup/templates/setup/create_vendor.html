@@ -47,7 +47,39 @@
 					<p class="mt-1 text-sm text-red-700">{{ error }}</p>
 				{% endfor %}
 			</div>
+			<div>
+				<label for="{{ form.phone_number.id_for_label }}" class="mb-2 block text-sm font-medium text-slate-700">Phone Number</label>
+				{{ form.phone_number }}
+				{% for error in form.phone_number.errors %}
+					<p class="mt-1 text-sm text-red-700">{{ error }}</p>
+				{% endfor %}
+			</div>
 		</div>
+		<!-- Search / Find Section -->
+<div class="card mb-4 p-3 shadow-sm">
+    <form method="GET" action="{% url 'create_vendor' %}" class="row g-2 align-items-center">
+        <div class="col-auto">
+            <input type="text" name="search_code" class="form-control" placeholder="Enter Vendor Code (e.g. VEN00001)" value="{{ search_code }}">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Find Vendor</button>
+            <a href="{% url 'vendor_list' %}" class="btn btn-secondary">View All Vendors</a>
+        </div>
+    </form>
+
+    <!-- Found Vendor Result Card -->
+    {% if searched_vendor %}
+    <div class="alert alert-info mt-3 mb-0 d-flex justify-content-between align-items-center">
+        <div>
+            <strong>Vendor Found:</strong> {{ searched_vendor.vendor_code }} - {{ searched_vendor.vendor_name }} ({{ searched_vendor.company_name }})
+        </div>
+        <div>
+            <!-- View Single Vendor Button -->
+            <a href="{% url 'vendor_detail' searched_vendor.pk %}" class="btn btn-sm btn-success">View Details</a>
+        </div>
+    </div>
+    {% endif %}
+</div>
 
 		<div class="flex justify-end border-t border-slate-200 bg-slate-50 px-6 py-4">
 			<button type="submit" class="rounded-md bg-teal-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:ring-offset-2">
