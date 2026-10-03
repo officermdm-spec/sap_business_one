@@ -5,7 +5,9 @@ class Vendor(models.Model):
 	vendor_code = models.CharField(max_length=20, unique=True, blank=True, editable=False)
 	vendor_name = models.CharField(max_length=150)
 	company_name = models.CharField(max_length=150, blank=True, null=True)
-	phone_number = models.CharField(max_length=20, )
+	company_email = models.EmailField(blank=True, null=True)
+	phone_number = models.CharField(max_length=20, blank=True, null=True)
+	company_address = models.TextField(blank=True, null=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	created_by = models.ForeignKey(
 		settings.AUTH_USER_MODEL,

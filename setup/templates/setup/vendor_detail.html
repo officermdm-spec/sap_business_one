@@ -15,7 +15,9 @@
                 <tr><th>Vendor Code</th><td>{{ vendor.vendor_code }}</td></tr>
                 <tr><th>Vendor Name</th><td>{{ vendor.vendor_name }}</td></tr>
                 <tr><th>Company Name</th><td>{{ vendor.company_name }}</td></tr>
+                <tr><th>Company Email</th><td>{{ vendor.company_email }}</td></tr>
                 <tr><th>Phone Number</th><td>{{ vendor.phone_number }}</td></tr>
+                <tr><th>Company Address</th><td>{{ vendor.company_address }}</td></tr>
                 <tr><th>Created At</th><td>{{ vendor.created_at|date:"d M Y, h:i A" }}</td></tr>
                 <tr><th>Created By</th><td>{{ vendor.created_by.get_full_name|default:vendor.created_by.username }}</td></tr>
             </table>

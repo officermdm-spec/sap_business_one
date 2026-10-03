@@ -36,7 +36,9 @@
                         <th scope="col" class="px-6 py-3 font-semibold">Vendor code</th>
                         <th scope="col" class="px-6 py-3 font-semibold">Vendor name</th>
                         <th scope="col" class="px-6 py-3 font-semibold">Company name</th>
+                        <th scope="col" class="px-6 py-3 font-semibold">Company email</th>
                         <th scope="col" class="px-6 py-3 font-semibold">Phone Number</th>
+                        <th scope="col" class="px-6 py-3 font-semibold">Company address</th>
                         <th scope="col" class="px-6 py-3 font-semibold">Created at</th>
                         <th scope="col" class="px-6 py-3 font-semibold">Created By</th>
                     </tr>
@@ -47,7 +49,9 @@
                             <td class="whitespace-nowrap px-6 py-4 font-medium text-slate-900">{{ vendor.vendor_code }}</td>
                             <td class="px-6 py-4 text-slate-700">{{ vendor.vendor_name }}</td>
                             <td class="px-6 py-4 text-slate-700">{{ vendor.company_name }}</td>
+                            <td class="px-6 py-4 text-slate-700">{{ vendor.company_email }}</td>
                             <td class="px-6 py-4 text-slate-700">{{ vendor.phone_number }}</td>
+                            <td class="px-6 py-4 text-slate-700">{{ vendor.company_address }}</td>
                             <td class="px-6 py-4 text-slate-700">{{ vendor.created_at }}</td>
                             <td class="px-6 py-4 text-slate-700">{% if vendor.created_by %}{{ vendor.created_by.get_full_name|default:vendor.created_by.username }}{% else %}-{% endif %}</td>
                         </tr>
