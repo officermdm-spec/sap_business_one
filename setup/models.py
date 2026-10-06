@@ -36,39 +36,25 @@ class Vendor(models.Model):
 		return f"{self.vendor_code} - {self.vendor_name}"
 
 
-# Create Country 
-# class Country(models.Model):
-# 	country_code = models.CharField(max_length=10, unique=True)
-# 	country_name = models.CharField(max_length=100)
-# 	is_active = models.BooleanField(default=True)
-
-# 	def __str__(self):
-# 		return f"{self.country_name} ({self.country_code})"
-
-# 	def save(self, *args, **kwargs):
-# 		super().save(*args, **kwargs)
-# 		if not self.country_code:
-# 			self.country_code = f"CTR{self.pk:05d}"
-# 			# type(self).objects.filter(pk=self.pk).update(country_code=self.country_code)
-
-import uuid
-
 class Country(models.Model):
-    country_code = models.CharField(max_length=10, unique=True)
+    country_code = models.CharField(max_length=10,unique=True,blank=True)
     country_name = models.CharField(max_length=100)
     is_active = models.BooleanField(default=True)
-
+    
     def __str__(self):
         return f"{self.country_name} ({self.country_code})"
 
     def save(self, *args, **kwargs):
         if not self.country_code:
-            self.country_code = f"TEMP-{uuid.uuid4().hex[:8]}"
+            super().save(*args, **kwargs)
 
-        super().save(*args, **kwargs)
-
-        if self.country_code.startswith("TEMP-"):
             self.country_code = f"CTR{self.pk:05d}"
-            type(self).objects.filter(pk=self.pk).update(
+
+            type(self).objects.filter(
+                pk=self.pk
+            ).update(
                 country_code=self.country_code
             )
+        else:
+            super().save(*args, **kwargs)
+

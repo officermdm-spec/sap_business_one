@@ -2,7 +2,7 @@ from django.contrib import messages
 from .forms import CountryForm, VendorForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Vendor
+from .models import Country, Vendor
 
 
 @login_required
@@ -89,7 +89,8 @@ def vendor_detail(request, pk):
 def create_country(request):
     form = CountryForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
-        form.save()
+        country = form.save()
+        messages.success(request, f'Country {country.country_code} was created successfully.')
         return redirect('create_country')
 
     return render(
