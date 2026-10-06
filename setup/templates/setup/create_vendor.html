@@ -1,15 +1,8 @@
 {% extends "base.html" %}
-
-{% block title %}Create Vendor | Nexa ERP{% endblock %}
-
-{% block header_title %}Create Vendor{% endblock %}
-
 {% block content %}
 <div class="mx-auto max-w-4xl">
 	<div class="mb-8">
-		<p class="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">Setup / Vendors</p>
-		<h2 class="mt-2 text-2xl font-bold text-slate-900">New vendor</h2>
-		<p class="mt-1 text-sm text-slate-500">Enter the vendor's identifying details.</p>
+		<h2 class="mt-2 text-2xl font-bold text-slate-900 text-center">Vendor Entry Form</h2>
 	</div>
 
 	<form method="post" class="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
@@ -30,9 +23,13 @@
 			<button type="submit" name="action" value="find" formnovalidate class="rounded-md border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">Find</button>
 			{% if found_vendor %}
 				<a href="{% url 'vendor_detail' found_vendor.pk %}" class="rounded-md border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">View</a>
-				<button type="submit" name="action" value="update" class="rounded-md border border-teal-700 bg-white px-4 py-2.5 text-sm font-semibold text-teal-800 transition hover:bg-teal-50">Update</button>
-				<button type="submit" name="action" value="delete" onclick="return confirm('Delete this vendor?')" class="rounded-md border border-red-300 bg-white px-4 py-2.5 text-sm font-semibold text-red-700 transition hover:bg-red-50">Delete</button>
 			{% endif %}
+			{% if not found_vendor %}
+				<button type="button" disabled class="cursor-not-allowed rounded-md border border-slate-300 bg-slate-100 px-4 py-2.5 text-sm font-semibold text-slate-500">View</button>
+			{% endif %}
+			<button type="submit" name="action" value="update" {% if not found_vendor %}disabled{% endif %} class="rounded-md border border-teal-700 bg-white px-4 py-2.5 text-sm font-semibold text-teal-800 transition hover:bg-teal-50 disabled:cursor-not-allowed disabled:border-slate-300 disabled:bg-slate-100 disabled:text-slate-500">Update</button>
+			<button type="submit" name="action" value="delete" onclick="return confirm('Delete this vendor?')" {% if not found_vendor %}disabled{% endif %} class="rounded-md border border-red-300 bg-white px-4 py-2.5 text-sm font-semibold text-red-700 transition hover:bg-red-50 disabled:cursor-not-allowed disabled:border-slate-300 disabled:bg-slate-100 disabled:text-slate-500">Delete</button>
+			<button type="reset" name="reset" value="reset" class="rounded-md border border-teal-700 bg-white px-4 py-2.5 text-sm font-semibold text-teal-800 transition hover:bg-teal-50 disabled:cursor-not-allowed disabled:border-slate-300 disabled:bg-slate-100 disabled:text-slate-500">Refresh</button>
 			<button type="submit" name="action" value="save" class="rounded-md bg-teal-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:ring-offset-2">Save</button>
 		</div>
 
@@ -74,9 +71,30 @@
 				{% endfor %}
 			</div>
 			<div>
+				<label for="{{ form.bank_name.id_for_label }}" class="mb-2 block text-sm font-medium text-slate-700">Bank Name</label>
+				{{ form.bank_name }}
+				{% for error in form.bank_name.errors %}
+					<p class="mt-1 text-sm text-red-700">{{ error }}</p>
+				{% endfor %}
+			</div>
+			<div>
+				<label for="{{ form.bank_account_number.id_for_label }}" class="mb-2 block text-sm font-medium text-slate-700">Bank Account Number</label>
+				{{ form.bank_account_number }}
+				{% for error in form.bank_account_number.errors %}
+					<p class="mt-1 text-sm text-red-700">{{ error }}</p>
+				{% endfor %}
+			</div>
+			<div>
 				<label for="{{ form.company_address.id_for_label }}" class="mb-2 block text-sm font-medium text-slate-700">Company address</label>
 				{{ form.company_address }}
 				{% for error in form.company_address.errors %}
+					<p class="mt-1 text-sm text-red-700">{{ error }}</p>
+				{% endfor %}
+			</div>
+			<div>
+				<label for="{{ form.is_active.id_for_label }}" class="mb-2 block text-sm font-medium text-slate-700">Is Active</label>
+				{{ form.is_active }}
+				{% for error in form.is_active.errors %}
 					<p class="mt-1 text-sm text-red-700">{{ error }}</p>
 				{% endfor %}
 			</div>

@@ -1,5 +1,5 @@
 from django.contrib import messages
-from .forms import VendorForm
+from .forms import CountryForm, VendorForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Vendor
@@ -84,3 +84,16 @@ def vendor_detail(request, pk):
         {'title': 'Vendor Details', 'module': 'Setup', 'vendor': vendor},
     )
     
+# Create Country 
+@login_required
+def create_country(request):
+    form = CountryForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('create_country')
+
+    return render(
+        request,
+        'setup/create_country.html',
+        {'form': form},
+        )

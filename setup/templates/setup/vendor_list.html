@@ -1,19 +1,34 @@
+```html
 {% extends "base.html" %}
 
-{% block title %}Vendor Report | Nexa ERP{% endblock %}
+{% block title %}Vendor Report List{% endblock %}
 {% block header_title %}Vendor Report{% endblock %}
 
 {% block content %}
 <div class="mx-auto max-w-5xl">
+
     <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">Setup / Vendors</p>
-            <h2 class="mt-2 text-2xl font-bold text-slate-900">Vendor report</h2>
-            <p class="mt-1 text-sm text-slate-500">{{ vendors|length }} vendor{{ vendors|length|pluralize }}</p>
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
+                Setup / Vendors
+            </p>
+
+            <h2 class="mt-2 text-2xl font-bold text-slate-900">
+                Vendor report
+            </h2>
+
+            <p class="mt-1 text-sm text-slate-500">
+                {{ vendors|length }} vendor{{ vendors|length|pluralize }}
+            </p>
         </div>
+
         <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
+
             <form method="get" action="{% url 'vendor_list' %}" class="flex min-w-0 gap-2">
-                <label for="search-code" class="sr-only">Search by vendor code</label>
+                <label for="search-code" class="sr-only">
+                    Search by vendor code
+                </label>
+
                 <input
                     id="search-code"
                     type="search"
@@ -22,49 +37,124 @@
                     placeholder="Vendor code, e.g. VEN00001"
                     class="min-w-0 w-full rounded-md border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 sm:w-64"
                 >
-                <button type="submit" class="rounded-md border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">Search</button>
+
+                <button
+                    type="submit"
+                    class="rounded-md border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+                >
+                    Search
+                </button>
             </form>
-            <a href="{% url 'create_vendor' %}" class="whitespace-nowrap rounded-md bg-teal-700 px-4 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-teal-800">Create vendor</a>
+
+            <a
+                href="{% url 'create_vendor' %}"
+                class="whitespace-nowrap rounded-md bg-teal-700 px-4 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-teal-800"
+            >
+                Create vendor
+            </a>
         </div>
     </div>
 
     <div class="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
         <div class="overflow-x-auto">
+
             <table class="w-full text-left text-sm">
+
                 <thead class="bg-slate-50 text-xs uppercase text-slate-500">
                     <tr>
-                        <th scope="col" class="px-6 py-3 font-semibold">Vendor code</th>
-                        <th scope="col" class="px-6 py-3 font-semibold">Vendor name</th>
-                        <th scope="col" class="px-6 py-3 font-semibold">Company name</th>
-                        <th scope="col" class="px-6 py-3 font-semibold">Company email</th>
-                        <th scope="col" class="px-6 py-3 font-semibold">Phone Number</th>
-                        <th scope="col" class="px-6 py-3 font-semibold">Company address</th>
-                        <th scope="col" class="px-6 py-3 font-semibold">Created at</th>
-                        <th scope="col" class="px-6 py-3 font-semibold">Created By</th>
+                        <th scope="col" class="px-6 py-3 font-semibold">
+                            Vendor code
+                        </th>
+
+                        <th scope="col" class="px-6 py-3 font-semibold">
+                            Vendor name
+                        </th>
+
+                        <th scope="col" class="px-6 py-3 font-semibold">
+                            Company name
+                        </th>
+
+                        <th scope="col" class="px-6 py-3 font-semibold">
+                            Company email
+                        </th>
+
+                        <th scope="col" class="px-6 py-3 font-semibold">
+                            Phone Number
+                        </th>
+
+                        <th scope="col" class="px-6 py-3 font-semibold">
+                            Company address
+                        </th>
+
+                        {% comment %} <th scope="col" class="px-6 py-3 font-semibold">
+                            Created at
+                        </th>
+
+                        <th scope="col" class="px-6 py-3 font-semibold">
+                            Created By
+                        </th> {% endcomment %}
                     </tr>
                 </thead>
+
                 <tbody class="divide-y divide-slate-100">
+
                     {% for vendor in vendors %}
-                        <tr class="hover:bg-slate-50">
-                            <td class="whitespace-nowrap px-6 py-4 font-medium text-slate-900">{{ vendor.vendor_code }}</td>
-                            <td class="px-6 py-4 text-slate-700">{{ vendor.vendor_name }}</td>
-                            <td class="px-6 py-4 text-slate-700">{{ vendor.company_name }}</td>
-                            <td class="px-6 py-4 text-slate-700">{{ vendor.company_email }}</td>
-                            <td class="px-6 py-4 text-slate-700">{{ vendor.phone_number }}</td>
-                            <td class="px-6 py-4 text-slate-700">{{ vendor.company_address }}</td>
-                            <td class="px-6 py-4 text-slate-700">{{ vendor.created_at }}</td>
-                            <td class="px-6 py-4 text-slate-700">{% if vendor.created_by %}{{ vendor.created_by.get_full_name|default:vendor.created_by.username }}{% else %}-{% endif %}</td>
-                        </tr>
+
+                    <tr class="hover:bg-slate-50">
+
+                        <td class="whitespace-nowrap px-6 py-4 font-medium text-slate-900">
+                            {{ vendor.vendor_code }}
+                        </td>
+
+                        <td class="px-6 py-4 text-slate-700">
+                            {{ vendor.vendor_name }}
+                        </td>
+
+                        <td class="px-6 py-4 text-slate-700">
+                            {{ vendor.company_name }}
+                        </td>
+
+                        <td class="px-6 py-4 text-slate-700">
+                            {{ vendor.company_email }}
+                        </td>
+
+                        <td class="px-6 py-4 text-slate-700">
+                            {{ vendor.phone_number }}
+                        </td>
+
+                        <td class="px-6 py-4 text-slate-700">
+                            {{ vendor.company_address }}
+                        </td>
+
+                        {% comment %} <td class="whitespace-nowrap px-6 py-4 text-slate-700">
+                            {{ vendor.created_at|date:"d M Y, h:i A" }}
+                        </td> {% endcomment %}
+
+                        {% comment %} <td class="whitespace-nowrap px-6 py-4 text-slate-700">
+                            {{ vendor.created_by.username }}
+                        </td> {% endcomment %}
+
+                    </tr>
+
                     {% empty %}
-                        <tr>
-                            <td colspan="6" class="px-6 py-12 text-center text-sm text-slate-500">
-                                {% if search_code %}No vendor matches "{{ search_code }}".{% else %}No vendors have been created yet.{% endif %}
-                            </td>
-                        </tr>
+
+                    <tr>
+                        <td
+                            colspan="8"
+                            class="px-6 py-8 text-center text-sm text-slate-500"
+                        >
+                            No vendors found.
+                        </td>
+                    </tr>
+
                     {% endfor %}
+
                 </tbody>
+
             </table>
+
         </div>
     </div>
+
 </div>
 {% endblock %}

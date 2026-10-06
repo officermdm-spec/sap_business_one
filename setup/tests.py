@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 
-from .models import Vendor
+from .models import Country, Vendor
 
 
 class VendorEntryTests(TestCase):
@@ -20,6 +20,14 @@ class VendorEntryTests(TestCase):
 		vendor = Vendor.objects.get(vendor_name="Northwind Supplies")
 		self.assertEqual(vendor.vendor_code, f"VEN{vendor.pk:05d}")
 		self.assertContains(response, vendor.vendor_code)
+
+	def test_vendor_actions_are_visible_before_a_vendor_is_found(self):
+		response = self.client.get(reverse("create_vendor"))
+
+		self.assertContains(response, ">View</button>")
+		self.assertContains(response, 'value="update" disabled')
+		self.assertContains(response, 'value="delete"')
+		self.assertContains(response, ">Save</button>")
 
 	def test_find_loads_vendor_and_shows_its_view_link(self):
 		vendor = Vendor.objects.create(vendor_name="Northwind Supplies", created_by=self.user)
@@ -65,3 +73,25 @@ class VendorEntryTests(TestCase):
 		self.assertFalse(Vendor.objects.filter(pk=vendor.pk).exists())
 		self.assertTrue(Vendor.objects.filter(pk=other_vendor.pk).exists())
 		self.assertContains(response, "deleted successfully")
+
+
+class CountryEntryTests(TestCase):
+	def setUp(self):
+		self.user = get_user_model().objects.create_user(username="country-user", password="test-pass")
+		self.client.force_login(self.user)
+
+	def test_create_country_form_displays_country_name_input(self):
+		response = self.client.get(reverse("create_country"))
+
+		self.assertContains(response, 'name="country_code"')
+		self.assertContains(response, 'name="country_name"')
+		self.assertContains(response, 'id="id_country_name"')
+
+	def test_post_create_country_saves_country_name(self):
+		response = self.client.post(
+			reverse("create_country"),
+			{"country_code": "PAK", "country_name": "Pakistan", "is_active": "on"},
+		)
+
+		self.assertRedirects(response, reverse("create_country"))
+		self.assertTrue(Country.objects.filter(country_code="PAK", country_name="Pakistan", is_active=True).exists())

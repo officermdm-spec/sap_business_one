@@ -7,7 +7,10 @@ class Vendor(models.Model):
 	company_name = models.CharField(max_length=150, blank=True, null=True)
 	company_email = models.EmailField(blank=True, null=True)
 	phone_number = models.CharField(max_length=20, blank=True, null=True)
+	bank_name = models.CharField(max_length=100, blank=True, null=True)
+	bank_account_number = models.CharField(max_length=50, blank=True, null=True)
 	company_address = models.TextField(blank=True, null=True)
+	is_active = models.BooleanField(default=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	created_by = models.ForeignKey(
 		settings.AUTH_USER_MODEL,
@@ -31,3 +34,41 @@ class Vendor(models.Model):
 
 	def __str__(self):
 		return f"{self.vendor_code} - {self.vendor_name}"
+
+
+# Create Country 
+# class Country(models.Model):
+# 	country_code = models.CharField(max_length=10, unique=True)
+# 	country_name = models.CharField(max_length=100)
+# 	is_active = models.BooleanField(default=True)
+
+# 	def __str__(self):
+# 		return f"{self.country_name} ({self.country_code})"
+
+# 	def save(self, *args, **kwargs):
+# 		super().save(*args, **kwargs)
+# 		if not self.country_code:
+# 			self.country_code = f"CTR{self.pk:05d}"
+# 			# type(self).objects.filter(pk=self.pk).update(country_code=self.country_code)
+
+import uuid
+
+class Country(models.Model):
+    country_code = models.CharField(max_length=10, unique=True)
+    country_name = models.CharField(max_length=100)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.country_name} ({self.country_code})"
+
+    def save(self, *args, **kwargs):
+        if not self.country_code:
+            self.country_code = f"TEMP-{uuid.uuid4().hex[:8]}"
+
+        super().save(*args, **kwargs)
+
+        if self.country_code.startswith("TEMP-"):
+            self.country_code = f"CTR{self.pk:05d}"
+            type(self).objects.filter(pk=self.pk).update(
+                country_code=self.country_code
+            )

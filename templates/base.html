@@ -40,6 +40,10 @@
                         <div class="mt-1 space-y-1 border-l border-slate-700 pl-4">
                             <a href="{% url 'vendor_list' %}" class="block rounded-lg px-3 py-2 text-xs text-slate-400 transition hover:bg-white/5 hover:text-white">Vendor List</a>
                         </div>
+                        {% comment %} Create Country {% endcomment %}
+                        <div class="mt-1 space-y-1 border-l border-slate-700 pl-4">
+                            <a href="{% url 'create_country' %}" class="block rounded-lg px-3 py-2 text-xs text-slate-400 transition hover:bg-white/5 hover:text-white">Create Country</a>
+                        </div>
                     </details>
 
                     <details class="group mt-1" open>
@@ -67,17 +71,6 @@
         </aside>
 
         <main class="min-w-0 flex-1 lg:ml-72">
-            <header class="flex min-h-20 items-center justify-between border-b border-slate-200 bg-white px-5 py-4 sm:px-8">
-                <div>
-                    <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-teal-600">Nexa workspace</p>
-                    <h1 class="mt-1 text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">{% block header_title %}Dashboard{% endblock %}</h1>
-                </div>
-                <div class="hidden items-center gap-3 sm:flex">
-                    <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
-                    <span class="text-xs font-medium text-slate-500">System online</span>
-                </div>
-            </header>
-
             <div class="p-5 sm:p-8 lg:p-10">
                 {% block content %}{% endblock %}
             </div>
